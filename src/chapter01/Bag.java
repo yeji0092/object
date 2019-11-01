@@ -22,6 +22,17 @@ public class Bag {
         this.invitation = invitation;
     }
 
+    //Bag에게 자율성을 주어 응집도를 높임
+    public Long hold(Ticket ticket){
+        if(hasInvitaion()){
+            setTicket(ticket);
+            return 0L;
+        }else{
+            setTicket(ticket);
+            minusAmount(ticket.getFee());
+            return ticket.getFee();
+        }
+    }
     public boolean hasInvitaion(){
         return invitation != null;
     }

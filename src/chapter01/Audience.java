@@ -13,15 +13,10 @@ public class Audience {
     getBag 메소드 삭제
     Bag에 대한 접근을 캡슐화하여 TicketSeller와 Bag사이의 결합도를 낮춤
      */
+    /*
+    Bag에 자율성을 주어 Bag 내부에 티켓구매를 수행하는 로직을 넣어줌
+     */
     public Long buyTicket(Ticket ticket){
-        if(bag.hasInvitaion()){//초대장 소지하고 있는 관람객
-            bag.setTicket(ticket);
-            return 0L;
-            //초대장 삭제하는 로직?
-        }else{
-            bag.setTicket(ticket);
-            bag.minusAmount(ticket.getFee());
-            return ticket.getFee();
-        }
+        return bag.hold(ticket);
     }
 }
