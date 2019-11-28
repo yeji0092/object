@@ -11,6 +11,10 @@ public class Movie {
     private Money fee;
     private List<DiscountCondition> discountConditions;
 
+    private MovieType movieType;
+    private Money discountAmount;
+    private double discountPercent;
+
     public Money getFee() {
         return fee;
     }
@@ -51,8 +55,6 @@ public class Movie {
         this.discountPercent = discountPercent;
     }
 
-    private MovieType movieType;
-    private Money discountAmount;
-    private double discountPercent;
+
 
 }

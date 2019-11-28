@@ -5,7 +5,7 @@ import chapter02.Policy.DiscountPolicy;
 
 import java.time.Duration;
 
-public class Movie {
+public abstract class Movie {
     private String title; //제목
     private Duration runningTime; //상영시간
     private Money fee; //기본요금
@@ -35,4 +35,5 @@ public class Movie {
          */
         return fee.minus(discountPolicy.calculateDiscountAmount(screening));
     }
+
 }

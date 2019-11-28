@@ -8,20 +8,22 @@ public class Reserve {
     private int customer;
     private Movie movie;
     private Date date;
+    private int sequence;
 
     private Screening screening;
     private int screeningFee; //선택한 상영의 1인 요금
     private int totalFee; //인원수에 맞게 계산한 최종 영화요금(할인 포함)
 
-    public Reserve(int customer, Movie movie, Date date){
+    public Reserve(int customer, int sequence, Movie movie, Date date){
         this.customer = customer;
         this.movie = movie;
         this.date = date;
+        this.sequence = sequence;
     }
 
     public int calculateTotalFee(){
         //인원수랑 screening 객체 안의 정보들 이용해서 해당 영화 요금 계산해서 반환
-        screening = new Screening(movie, date);
+        screening = new Screening(movie, date, sequence);
         screeningFee = screening.calculateScreeningFee();
         totalFee = screeningFee*customer;
         return totalFee;

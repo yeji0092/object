@@ -20,4 +20,8 @@ public class Movie {
         //Screening안에 Movie(title, fee,discount)와 선택한 상영날짜(date) 있음
         return discount.getDiscountMovieFee(screening);
     }
+
+    public Discount getDiscount() {
+        return discount;
+    }
 }
