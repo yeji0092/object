@@ -1,10 +1,10 @@
-package movieReserveProgram;
+package movieReserveProgram.Discount.Condition;
 
 public class DiscountCondition {
     public DiscountCondition(){
 
     }
-    public DiscountCondition getDiscount() {
+    public DiscountCondition getDiscountCondition() {
         DiscountCondition discountCondition=null;
         return discountCondition;
     }
