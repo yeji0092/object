@@ -1,6 +1,8 @@
 package movieReserveProgram.Discount.Condition;
 
-public class DiscountCondition {
+import movieReserveProgram.Screening;
+
+public abstract class DiscountCondition {
     public DiscountCondition(){
 
     }
@@ -8,4 +10,5 @@ public class DiscountCondition {
         DiscountCondition discountCondition=null;
         return discountCondition;
     }
+    abstract public boolean isSatisfiedCondition(Screening screening);
 }

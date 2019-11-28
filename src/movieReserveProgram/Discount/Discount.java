@@ -28,7 +28,7 @@ public class Discount {
     public void getDiscountInfo() {
         if(isDiscount()){
             //할인정책 요청
-            discountPolicy.getDiscountPolicyInfo();
+//            discountPolicy.getDiscountPolicyInfo();
         }else{
             //할인조건, 할인정책 음슴
         }
@@ -48,21 +48,11 @@ public class Discount {
 
     }
 
-    public int getDiscountMovieFee(Screening screening) {
-        /*
-        Screening
-        private Movie movie; //title, fee, discount
-        private Date date;
-        private int sequence;
-        */
-        //문제 발생! screening안에 movie있고, movie안에 discount있고, discount안에 discountcondition 존재한다는 모든 사실을 알아야함
-        //discount에서 계산하는게 맞는가?
-        //그냥 인포들만 반환해서 Screening에서 계산할까?
-        List<DiscountCondition> discountConditions = screening.getMovie().getDiscount().getDiscountConditions();
-        return 0;
+    public List<DiscountCondition> getDiscountConditions() {
+        return discountConditions;
     }
 
-    private List<DiscountCondition> getDiscountConditions() {
-        return discountConditions;
+    public DiscountPolicy getDiscountPolicy() {
+        return discountPolicy;
     }
 }

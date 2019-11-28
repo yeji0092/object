@@ -6,4 +6,9 @@ public class PercentDiscountPolicy extends DiscountPolicy {
     public PercentDiscountPolicy(float discountPercent) {
         this.discountPercent = discountPercent;
     }
+
+    @Override
+    public int getDiscountAmount(int fee) {
+        return (int)(fee*discountPercent);
+    }
 }

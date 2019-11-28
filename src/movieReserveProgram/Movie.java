@@ -15,13 +15,11 @@ public class Movie {
         this.fee = fee;
         this.discount = discount;
     }
-    public int getFee(Screening screening) {
-        //Screening과 fee 넘기고 할인적용한 요금 반환받기
-        //Screening안에 Movie(title, fee,discount)와 선택한 상영날짜(date) 있음
-        return discount.getDiscountMovieFee(screening);
+    public int getFee() {
+        return fee;
     }
 
-    public Discount getDiscount() {
-        return discount;
+    public Discount getMovieDiscountInfo(Movie movie) {
+        return movie.discount;
     }
 }

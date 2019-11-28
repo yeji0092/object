@@ -6,4 +6,9 @@ public class AmountDiscountPolicy extends DiscountPolicy {
     public AmountDiscountPolicy(int discountAmount) {
         this.discountAmount = discountAmount;
     }
+
+    @Override
+    public int getDiscountAmount(int fee) {
+        return discountAmount;
+    }
 }

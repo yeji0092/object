@@ -1,6 +1,6 @@
 package movieReserveProgram.Discount.Policy;
 
-public class DiscountPolicy {
-    public void getDiscountPolicyInfo() {
-    }
+public abstract class DiscountPolicy {
+    abstract public int getDiscountAmount(int fee);
+
 }
