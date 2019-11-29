@@ -4,13 +4,17 @@ import movieReserveProgram.Discount.Condition.DiscountCondition;
 import movieReserveProgram.Discount.Discount;
 import movieReserveProgram.Discount.Policy.DiscountPolicy;
 
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 public class Screening {
+    /*
+    Screening의 책임 : Discount정보 받아서 선택한 상영정보와 일치하는 지 검사 후, 1인 요금 계산해서 반환
+     */
     private Movie movie;
-    private Date date;
+    private LocalDate date;
+    private LocalTime screeningStartTime;
     private int sequence;
 
     private Discount movieDiscount;
@@ -19,52 +23,43 @@ public class Screening {
 
     private int screeningFee;
 
-    public Screening(Movie movie, Date date, int sequence) {
+    public Screening(Movie movie, int sequence, LocalDate date, LocalTime screeningStartTime) {
         this.movie = movie;
-        this.date = date;
         this.sequence = sequence;
+        this.date = date;
+        this.screeningStartTime = screeningStartTime;
     }
-    /*
-    Screening 정보 Movie로 넘기고, Movie에서 Discount로 넘기고
-    Discount에서 상영시간과 일치하는 할인조건 검사 후 1인 요금 계산하여 반환
-    */
+
     public int calculateScreeningFee() {
-        //반환된 정보들과, screening이 가지고 있는 상영의 정보들 일치 여부
         movieDiscount = movie.getMovieDiscountInfo(this.movie);
         discountPolicy = movieDiscount.getDiscountPolicy();
         discountConditions = movieDiscount.getDiscountConditions();
 
-        //메소드
-        int count=0;
-        if(isExistDiscount(discountConditions)){ //할인 조건이 존재할 경우
-            //할인조건이 순서조건일 경우
-            //할인조건이 기간조건일 경우
-            //for문 돌면서 조건 일치할때마다 counting
-            count = 10;
-        }else{ //적용될 할인조건, 정책이 없음
-            return movie.getFee();
-        }
-
-        //할인정책에 따라 계산하는 함수호출
-        //위의 counting 전달
-        screeningFee = movie.getFee() - getTotalDiscountAmount(discountPolicy, count);
+        screeningFee = movie.getFee()
+                - getTotalDiscountAmount(discountPolicy, getSatisfiedConditionCount(discountConditions));
         return screeningFee;
     }
 
-    private int getTotalDiscountAmount(DiscountPolicy discountPolicy, int count){ //할인금액
+    //선택한 상영의 할인조건에 따라 할인금액 계산해서 반환
+    private int getTotalDiscountAmount(DiscountPolicy discountPolicy, int count){
         int fee = movie.getFee(); //선택한 영화 요금
         return (discountPolicy.getDiscountAmount(fee)*count);
-    }
-    private boolean isExistDiscount(List<DiscountCondition> discountConditions) {
-        if(!discountConditions.isEmpty()){ //할인조건이 비어있지 않다면
-            return true;
-        }else
-            return false;
+        //할인 조건 없는 경우, count=0이므로 할인되는 금액은 0원으로 반환된다.
     }
 
+    //선택한 상영이 부합하는 할인조건 개수 반환
+    private int getSatisfiedConditionCount(List<DiscountCondition> discountConditions){
+        int count=0;
 
-    public Movie getMovie(){
-        return movie;
+        if(!discountConditions.isEmpty()){ //할인 조건이 존재할 경우
+            for (DiscountCondition condition:discountConditions) {
+                if(condition.isSatisfiedCondition(this))
+                    count++;
+            }
+            return count;
+        }else{ //적용될 할인조건, 정책이 없음
+            return 0;
+        }
     }
 
     public boolean isSequence(int sequence) {
@@ -73,8 +68,11 @@ public class Screening {
         else return false;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
+    public LocalTime getScreeningStartTime() {
+        return screeningStartTime;
+    }
 }

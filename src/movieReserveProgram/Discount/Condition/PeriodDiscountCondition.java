@@ -3,14 +3,15 @@ package movieReserveProgram.Discount.Condition;
 import movieReserveProgram.Screening;
 
 import java.time.DayOfWeek;
-import java.time.LocalDateTime;
+
+import java.time.LocalTime;
 
 public class PeriodDiscountCondition extends DiscountCondition {
     private DayOfWeek dayOfWeek; //요일
-    private LocalDateTime discountStartTime;
-    private LocalDateTime discountEndTime;
+    private LocalTime discountStartTime;
+    private LocalTime discountEndTime;
 
-    public PeriodDiscountCondition(DayOfWeek dayOfWeek, LocalDateTime discountStartTime, LocalDateTime discountEndTime) {
+    public PeriodDiscountCondition(DayOfWeek dayOfWeek, LocalTime discountStartTime, LocalTime discountEndTime) {
         this.dayOfWeek = dayOfWeek;
         this.discountStartTime = discountStartTime;
         this.discountEndTime = discountEndTime;
@@ -18,7 +19,9 @@ public class PeriodDiscountCondition extends DiscountCondition {
 
     @Override
     public boolean isSatisfiedCondition(Screening screening) {
-        screening.getDate();
-        return false;
+        //요일이 일치해야하고, 상영시작시간이 할인 조건시간 내에 존재해야함
+        return screening.getDate().getDayOfWeek().equals(dayOfWeek) &&
+                discountStartTime.compareTo(screening.getScreeningStartTime()) <= 0 &&
+                discountEndTime.compareTo(screening.getScreeningStartTime()) >= 0;
     }
 }
