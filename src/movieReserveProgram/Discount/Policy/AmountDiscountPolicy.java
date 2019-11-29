@@ -1,6 +1,6 @@
 package movieReserveProgram.Discount.Policy;
 
-public class AmountDiscountPolicy extends DiscountPolicy {
+public class AmountDiscountPolicy implements DiscountPolicy {
     private int discountAmount;
 
     public AmountDiscountPolicy(int discountAmount) {

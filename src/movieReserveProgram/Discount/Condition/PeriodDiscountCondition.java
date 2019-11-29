@@ -6,7 +6,7 @@ import java.time.DayOfWeek;
 
 import java.time.LocalTime;
 
-public class PeriodDiscountCondition extends DiscountCondition {
+public class PeriodDiscountCondition implements DiscountCondition {
     private DayOfWeek dayOfWeek; //요일
     private LocalTime discountStartTime;
     private LocalTime discountEndTime;

@@ -2,7 +2,7 @@ package movieReserveProgram.Discount.Condition;
 
 import movieReserveProgram.Screening;
 
-public class SequenceDiscountCondition extends DiscountCondition {
+public class SequenceDiscountCondition implements DiscountCondition {
     private int sequence;
 
     public SequenceDiscountCondition(int sequence) {

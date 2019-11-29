@@ -1,6 +1,6 @@
 package movieReserveProgram.Discount.Policy;
 
-public class PercentDiscountPolicy extends DiscountPolicy {
+public class PercentDiscountPolicy implements DiscountPolicy {
     private float discountPercent;
 
     public PercentDiscountPolicy(float discountPercent) {
