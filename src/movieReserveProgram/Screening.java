@@ -36,7 +36,8 @@ public class Screening {
         discountConditions = movieDiscount.getDiscountConditions();
 
         screeningFee = movie.getFee()
-                - getTotalDiscountAmount(discountPolicy, getSatisfiedConditionCount(discountConditions));
+                - getTotalDiscountAmount(discountPolicy,
+                getSatisfiedConditionCount(discountConditions));
         return screeningFee;
     }
 
@@ -53,8 +54,9 @@ public class Screening {
 
         if(!discountConditions.isEmpty()){ //할인 조건이 존재할 경우
             for (DiscountCondition condition:discountConditions) {
-                if(condition.isSatisfiedCondition(this))
+                if(condition.isSatisfiedCondition(this)) {
                     count++;
+                }
             }
             return count;
         }else{ //적용될 할인조건, 정책이 없음

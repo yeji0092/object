@@ -28,6 +28,17 @@ public class Reserve {
         this.screeningTime = screeningTime;
     }
 
+    @Override
+    public String toString() {
+        return "Reserve{" +
+                "인원수=" + customer +
+                ", 선택한 영화=" + movie.toString() +
+                ", 선택한 날짜=" + date +
+                ", 상영 시작 시간=" + screeningTime +
+                ", 회차=" + sequence +
+                '}';
+    }
+
     public int calculateTotalFee(){
         //인원수랑 screening 객체 안의 정보들 이용해서 해당 영화 요금 계산해서 반환
         screening = new Screening(movie, sequence, date, screeningTime);
